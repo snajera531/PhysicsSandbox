@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 2.0f;
+    public float speed = 5.0f;
     void Update()
     {
         Vector3 direction = Vector3.zero;
@@ -19,7 +19,5 @@ public class Player : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(direction);
         }
-
-        transform.position = Utilities.Wrap(transform.position, new Vector3(-10, -10, -10), new Vector3(10, 10, 10));
     }
 }
