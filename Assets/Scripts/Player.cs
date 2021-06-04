@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public CharacterController controller;
+    public float gravity = -9.81f;
+    public float speed = 10.0f;
+    public Vector3 velocity;
+
     void Update()
     {
-        Vector3 direction = Vector3.zero;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
+        Vector3 movement = transform.right * x + transform.forward * z;
 
-        Vector3 velocity = direction * speed;
-        transform.position += velocity * Time.deltaTime;
+        controller.Move(movement * speed * Time.deltaTime);
 
-        if(direction.magnitude > 0.1f)
-        {
-            transform.rotation = Quaternion.LookRotation(direction);
-        }
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 }
